@@ -3,46 +3,110 @@
 @using ClockApp.Models
 @inject IQuoteApi QuoteApi
 @inject IWorldTimeApi WorldTimeApi
+@inject IIpBaseApi IpBaseApi
 
-@if (Quote?.Data is not null)
-{
-    <p>@Quote.Data.en</p>
-    <p>@Quote.Data.author</p>
-    <button @onclick="GenerateQuote">GetQuote</button>
-}
-else
-{
-    <p>@Quote?.Message</p>
+<main class="@_theme">
+    <div class="quote">
+        @if (Quote?.Data is not null)
+        {
+            <p class="quote-text">
+                "@Quote.Data.en"
+                <button class="refresh-btn" @onclick="GenerateQuote"><img src="Assets/desktop/icon-refresh.svg" alt="refresh" /></button>
+            </p>
+            <p class="author">@Quote.Data.author</p>
+        }
+        else
+        {
+            <p>@Quote?.Message</p>
+        }
+    </div>
 
-}
+    <div class="current-time-section">
+        <div class="greeting">
+            <p><img src="@_iconUrl" alt="icon" /> @_greeting, it's currently</p>
+        </div>
 
-@if (CurrentTime?.Data is not null)
-{
-    <p>@CurrentTime.Data.client_ip</p>
-    <p>@CurrentTime.Data.timezone</p>
-    <p>@CurrentTime.Data.week_number</p>
-    <p>@CurrentTime.Data.day_of_year</p>
-}
-else
-{
-    <p>@CurrentTime?.Message</p>
+        <div class="time-section">
+            <p class="time">
+                @CurrentTime.Data.datetime.ToString("HH:mm")
+                <span class="abbreviation">@CurrentTime.Data.abbreviation</span>
+            </p>
+            <p class="city">In Ghent Belgium</p>
+        </div>
 
-}
+        <div class="extra-info-section">
+
+            @if (CurrentTime?.Data is not null)
+            {
+                <p>@CurrentTime.Data.timezone</p>
+                <p>@CurrentTime.Data.day_of_year</p>
+                <p>@CurrentTime.Data.day_of_week</p>
+                <p>@CurrentTime.Data.week_number</p>
+            }
+            else
+            {
+                <p>@CurrentTime?.Message</p>
+            }
+        </div>
+    </div>
+</main>
 
 @code {
     private ServiceResponse<Quote>? Quote { get; set; } = new();
-    private ServiceResponse<CurrentTime>? CurrentTime{ get; set; } = new();
+    private ServiceResponse<CurrentTime>? CurrentTime { get; set; } = new();
+    //private ServiceResponse<IpBase>? IpBase { get; set; } = new();
+
+    private string? _ip = string.Empty;
+    private string _theme = string.Empty;
+    private string _greeting = string.Empty;
+    private string _iconUrl = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         Quote = await QuoteApi.GetQuote();
         CurrentTime = await WorldTimeApi.GetCurrentTime();
 
+        if (CurrentTime.Data != null)
+        {
+            _ip = CurrentTime.Data.client_ip;
+        }
+
+        if (_ip != null)
+        {
+            //IpBase = await IpBaseApi.GetIpBase(_ip);
+        }
+        SetTheme();
+    }
+
+    private void SetTheme()
+    {
+        if (CurrentTime?.Data != null)
+        {
+            if (CurrentTime.Data.datetime.Hour > 5 && CurrentTime.Data.datetime.Hour < 12)
+            {
+                _theme = "day-time";
+                _greeting = "Good morning";
+                _iconUrl = "Assets/desktop/icon-sun.svg";
+            }
+            else if (CurrentTime.Data.datetime.Hour > 12 && CurrentTime.Data.datetime.Hour < 18)
+            {
+                _theme = "day-time";
+                _greeting = "Good afternoon";
+                _iconUrl = "Assets/desktop/icon-sun.svg";
+            }
+            else
+            {
+                _theme = "night-time";
+                _greeting = "Good evening";
+                _iconUrl = "Assets/desktop/icon-moon.svg";
+            }
+        }
     }
 
     private async Task GenerateQuote()
     {
         Quote = await QuoteApi.GetQuote();
     }
+
 
 }

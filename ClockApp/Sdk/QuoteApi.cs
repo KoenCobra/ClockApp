@@ -15,7 +15,7 @@ namespace ClockApp.Sdk
 
         public async Task<ServiceResponse<Quote>> GetQuote()
         {
-            var quoteResponse = new ServiceResponse<Quote>();
+            var serviceResponse = new ServiceResponse<Quote>();
 
             var response = await _httpClient.GetAsync("https://programming-quotes-api.herokuapp.com/Quotes/random");
             response.EnsureSuccessStatusCode();
@@ -25,15 +25,15 @@ namespace ClockApp.Sdk
 
             if (quote is null)
             {
-                quoteResponse.Success = false;
-                quoteResponse.Message = "No result";
+                serviceResponse.Success = false;
+                serviceResponse.Message = "No result";
             }
             else
             {
-                quoteResponse.Data = quote;
+                serviceResponse.Data = quote;
             }
 
-            return quoteResponse;
+            return serviceResponse;
         }
     }
 }

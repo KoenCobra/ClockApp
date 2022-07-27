@@ -1,2 +1,10 @@
-﻿
-/*$Font*/
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+
+:root{
+--black: #000000;
+--darkGray: #303030;
+--white: #FFFFFF;
+}
+
+$Font: 'Inter', sans-serif;

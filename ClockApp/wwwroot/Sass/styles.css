@@ -1,4 +1,12 @@
-﻿/*$Font*/
+﻿@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+:root {
+  --black: #000000;
+  --darkGray: #303030;
+  --white: #FFFFFF;
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -35,8 +43,9 @@ html:focus-within {
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
+  overflow: hidden;
   line-height: 1.5;
-  /*font-family: $Font;*/
+  font-family: "Inter", sans-serif;
 }
 
 /* A elements that don't have a class get default styles */
@@ -74,5 +83,83 @@ select {
     scroll-behavior: auto !important;
   }
 }
-/*$Font*/
-/*$Font*/
+:root {
+  --black: #000000;
+  --darkGray: #303030;
+  --white: #FFFFFF;
+}
+
+.app {
+  height: 100vh;
+}
+
+main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 3.5rem;
+  padding-left: 10.3125rem;
+}
+main.day-time, main.night-time {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../Assets/desktop/bg-image-daytime.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+main.night-time {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../Assets/desktop/bg-image-nighttime.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+main .quote {
+  color: var(--white);
+  width: 38rem;
+}
+main .quote .quote-text {
+  font-weight: 400;
+  font-size: 1.125rem;
+  padding-bottom: 0.8125rem;
+  position: relative;
+}
+main .quote .author {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+main .quote .refresh-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: -2.5rem;
+  border: 0;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+main .current-time-section .greeting p {
+  text-transform: uppercase;
+  color: var(--white);
+}
+main .current-time-section .time-section {
+  color: var(--white);
+}
+main .current-time-section .time-section .time {
+  font-weight: 700;
+  font-size: 12.5rem;
+}
+main .current-time-section .time-section .time span {
+  font-weight: 300;
+  font-size: 2.5rem;
+}
+main .current-time-section .time-section .city {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.3rem;
+}
+main .current-time-section .extra-info-section {
+  display: none;
+}
+
+:root {
+  --black: #000000;
+  --darkGray: #303030;
+  --white: #FFFFFF;
+}

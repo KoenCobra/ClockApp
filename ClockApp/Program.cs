@@ -12,5 +12,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddTransient<IQuoteApi, QuoteApi>();
 builder.Services.AddTransient<IWorldTimeApi, WorldTimeApi>();
+builder.Services.AddTransient<IIpBaseApi, IpBaseApi>();
 
 await builder.Build().RunAsync();

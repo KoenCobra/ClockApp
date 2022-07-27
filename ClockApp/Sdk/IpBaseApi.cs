@@ -4,33 +4,33 @@ using ClockApp.Sdk.Abstractions;
 
 namespace ClockApp.Sdk
 {
-    public class WorldTimeApi : IWorldTimeApi
+    public class IpBaseApi : IIpBaseApi
     {
         private readonly HttpClient _httpClient;
 
-        public WorldTimeApi(HttpClient httpClient)
+        public IpBaseApi(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<ServiceResponse<CurrentTime>> GetCurrentTime()
+        public async Task<ServiceResponse<IpBase>> GetIpBase(string ip)
         {
-            var serviceResponse = new ServiceResponse<CurrentTime>();
+            var serviceResponse = new ServiceResponse<IpBase>();
 
-            var response = await _httpClient.GetAsync("https://worldtimeapi.org/api/ip");
+            var response = await _httpClient.GetAsync($"https://api.ipbase.com/v2/info?apikey=A18KMLZAPB3xrreMkTX83lIYxKYMJch3IftKWHPY&ip={ip}");
             response.EnsureSuccessStatusCode();
 
             await using var responseStream = await response.Content.ReadAsStreamAsync();
-            var currentTime = await JsonSerializer.DeserializeAsync<CurrentTime>(responseStream);
+            var ipBase = await JsonSerializer.DeserializeAsync<IpBase>(responseStream);
 
-            if (currentTime is null)
+            if (ipBase is null)
             {
                 serviceResponse.Success = false;
                 serviceResponse.Message = "No result";
             }
             else
             {
-                serviceResponse.Data = currentTime;
+                serviceResponse.Data = ipBase;
             }
 
             return serviceResponse;
