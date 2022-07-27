@@ -1,1 +1,48 @@
 ﻿@page "/"
+@using ClockApp.Sdk.Abstractions
+@using ClockApp.Models
+@inject IQuoteApi QuoteApi
+@inject IWorldTimeApi WorldTimeApi
+
+@if (Quote?.Data is not null)
+{
+    <p>@Quote.Data.en</p>
+    <p>@Quote.Data.author</p>
+    <button @onclick="GenerateQuote">GetQuote</button>
+}
+else
+{
+    <p>@Quote?.Message</p>
+
+}
+
+@if (CurrentTime?.Data is not null)
+{
+    <p>@CurrentTime.Data.client_ip</p>
+    <p>@CurrentTime.Data.timezone</p>
+    <p>@CurrentTime.Data.week_number</p>
+    <p>@CurrentTime.Data.day_of_year</p>
+}
+else
+{
+    <p>@CurrentTime?.Message</p>
+
+}
+
+@code {
+    private ServiceResponse<Quote>? Quote { get; set; } = new();
+    private ServiceResponse<CurrentTime>? CurrentTime{ get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Quote = await QuoteApi.GetQuote();
+        CurrentTime = await WorldTimeApi.GetCurrentTime();
+
+    }
+
+    private async Task GenerateQuote()
+    {
+        Quote = await QuoteApi.GetQuote();
+    }
+
+}
