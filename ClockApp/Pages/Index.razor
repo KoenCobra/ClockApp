@@ -5,7 +5,7 @@
 @inject IWorldTimeApi WorldTimeApi
 @inject IIpBaseApi IpBaseApi
 
-<main class="@_theme">
+<main class="@_theme @(_more = _isMoreShowing ? "more" : "")">
     <div class="quote">
         @if (Quote?.Data is not null)
         {
@@ -23,7 +23,10 @@
 
     <div class="current-time-section">
         <div class="greeting">
-            <p><img src="@_iconUrl" alt="icon" /> @_greeting, it's currently</p>
+            <img src="@_iconUrl" alt="icon" />
+            <p>
+                @_greeting, it's currently
+            </p>
         </div>
 
         <div class="time-section">
@@ -31,23 +34,40 @@
                 @CurrentTime.Data.datetime.ToString("HH:mm")
                 <span class="abbreviation">@CurrentTime.Data.abbreviation</span>
             </p>
-            <p class="city">In Ghent Belgium</p>
         </div>
+        <p class="city">In Ghent, Belgium</p>
 
-        <div class="extra-info-section">
+    </div>
+    <button @onclick="ShowMore" class="more-btn">
+        <span>@(_arrowCssClass = _isMoreShowing ? "less" : "more")</span>
+        <div class="@(_arrowCssClass = _isMoreShowing ? "less-arrow" : "more-arrow")"></div>
+    </button>
 
-            @if (CurrentTime?.Data is not null)
-            {
+    <div class="extra-info-section">
+
+        @if (CurrentTime?.Data is not null)
+        {
+            <div class="extra-info">
+                <span>current timezone</span>
                 <p>@CurrentTime.Data.timezone</p>
+            </div>
+            <div class="extra-info">
+                <span>day of the year</span>
                 <p>@CurrentTime.Data.day_of_year</p>
+            </div>
+            <div class="extra-info">
+                <span>day of the week</span>
                 <p>@CurrentTime.Data.day_of_week</p>
+            </div>
+            <div class="extra-info">
+                <span>week number</span>
                 <p>@CurrentTime.Data.week_number</p>
-            }
-            else
-            {
-                <p>@CurrentTime?.Message</p>
-            }
-        </div>
+            </div>
+        }
+        else
+        {
+            <p>@CurrentTime?.Message</p>
+        }
     </div>
 </main>
 
@@ -60,6 +80,11 @@
     private string _theme = string.Empty;
     private string _greeting = string.Empty;
     private string _iconUrl = string.Empty;
+    private string _arrowCssClass = string.Empty;
+    private string _moreOrLess = string.Empty;
+    private string? _more;
+    private bool _isMoreShowing;
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -108,5 +133,9 @@
         Quote = await QuoteApi.GetQuote();
     }
 
+    private void ShowMore()
+    {
+        _isMoreShowing = !_isMoreShowing;
+    }
 
 }
