@@ -47,17 +47,17 @@
 
         @if (CurrentTime?.Data is not null)
         {
-            <div class="extra-info">
+            <div class="extra-info time-zone">
                 <span>current timezone</span>
                 <p>@CurrentTime.Data.timezone</p>
+            </div>
+            <div class="extra-info day-of-week">
+                <span>day of the week</span>
+                <p>@CurrentTime.Data.day_of_week</p>
             </div>
             <div class="extra-info">
                 <span>day of the year</span>
                 <p>@CurrentTime.Data.day_of_year</p>
-            </div>
-            <div class="extra-info">
-                <span>day of the week</span>
-                <p>@CurrentTime.Data.day_of_week</p>
             </div>
             <div class="extra-info">
                 <span>week number</span>

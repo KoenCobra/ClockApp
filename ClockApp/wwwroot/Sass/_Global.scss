@@ -30,9 +30,7 @@ main {
         .extra-info-section {
             height: 45%;
             opacity: 1;
-            padding-left: 10.3125rem;
-            padding-top: 4.625rem;
-            padding-bottom: 4.625rem;
+            visibility: visible;
         }
 
         .quote {
@@ -44,7 +42,6 @@ main {
         }
 
         .more-btn {
-            position: absolute;
             bottom: 28.5rem;
         }
     }
@@ -139,6 +136,10 @@ main {
         opacity: 0;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        padding-left: 10.3125rem;
+        padding-top: 3.625rem;
+        padding-bottom: 3.625rem;
+        visibility: hidden;
 
 
         .extra-info {
@@ -147,7 +148,7 @@ main {
 
             span {
                 font-weight: 400;
-                font-size: 0,9375rem;
+                font-size: 0.9375rem;
                 letter-spacing: 3px;
             }
 
@@ -155,6 +156,10 @@ main {
                 font-weight: 700;
                 font-size: 56px;
             }
+        }
+
+        .time-zone, .day-of-week {
+            margin-bottom: 1rem;
         }
     }
 
@@ -170,6 +175,7 @@ main {
         align-items: center;
         padding: 7px 7px 7px 17px;
         cursor: pointer;
+        transition: all 0.4s linear;
 
         .more-arrow {
             background-image: url('../Assets/desktop/icon-arrow-up.svg');
@@ -209,3 +215,5 @@ main {
         transform: translateY(0);
     }
 }
+
+
