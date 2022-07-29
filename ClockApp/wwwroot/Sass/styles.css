@@ -102,15 +102,63 @@ main {
   padding-bottom: 10.125rem;
   position: relative;
 }
-main.day-time, main.night-time {
+@media (max-width: 1000px) {
+  main {
+    padding-left: 4rem;
+    padding-top: 5rem;
+  }
+}
+@media (max-width: 700px) {
+  main {
+    padding-left: 1.26rem;
+    padding-right: 1.26rem;
+    padding-top: 2rem;
+  }
+}
+main.day-time {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../Assets/desktop/bg-image-daytime.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
+@media (max-width: 1000px) {
+  main.day-time {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../Assets/tablet/bg-image-daytime.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+@media (max-width: 700px) {
+  main.day-time {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../Assets/mobile/bg-image-daytime.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
 main.night-time {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../Assets/desktop/bg-image-nighttime.jpg");
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
+}
+@media (max-width: 1000px) {
+  main.night-time {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../Assets/tablet/bg-image-nighttime.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+@media (max-width: 700px) {
+  main.night-time {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../Assets/mobile/bg-image-nighttime.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+main.night-time .extra-info-section {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(40.7742px);
+}
+main.night-time .extra-info-section .extra-info {
+  color: var(--white);
 }
 main.more .extra-info-section {
   height: 45%;
@@ -121,16 +169,27 @@ main.more .quote {
   display: none;
 }
 main.more .current-time-section {
-  animation: greeting 0.5s linear;
+  animation: greeting 0.3s linear;
+  transform: translateY(-2rem);
 }
 main.more .more-btn {
-  bottom: 28.5rem;
+  bottom: 32.5rem;
+}
+@media (max-width: 700px) {
+  main.more .more-btn {
+    bottom: 25.5rem;
+  }
 }
 main .quote {
   color: var(--white);
   width: 38rem;
   transform: translateY(0);
-  transition: all 0.5s linear;
+  transition: all 0.3s linear;
+}
+@media (max-width: 700px) {
+  main .quote {
+    width: 80%;
+  }
 }
 main .quote .quote-text {
   font-weight: 400;
@@ -138,9 +197,19 @@ main .quote .quote-text {
   padding-bottom: 0.8125rem;
   position: relative;
 }
+@media (max-width: 700px) {
+  main .quote .quote-text {
+    font-size: 0.75rem;
+  }
+}
 main .quote .author {
   font-weight: 700;
   font-size: 1.125rem;
+}
+@media (max-width: 700px) {
+  main .quote .author {
+    font-size: 0.75rem;
+  }
 }
 main .quote .refresh-btn {
   position: absolute;
@@ -151,11 +220,21 @@ main .quote .refresh-btn {
   outline: none;
   cursor: pointer;
 }
+@media (max-width: 700px) {
+  main .current-time-section {
+    padding-top: 4rem;
+  }
+}
 main .current-time-section .greeting {
-  transition: all 0.5s linear;
+  transition: all 0.3s linear;
   display: flex;
   align-items: center;
   transform: translateY(1.5rem);
+}
+@media (max-width: 700px) {
+  main .current-time-section .greeting {
+    transform: translateY(0.5rem);
+  }
 }
 main .current-time-section .greeting p {
   text-transform: uppercase;
@@ -165,20 +244,52 @@ main .current-time-section .greeting p {
   font-weight: 400;
   font-size: 1.25rem;
 }
+@media (max-width: 1000px) {
+  main .current-time-section .greeting p {
+    letter-spacing: 3.6px;
+    font-size: 1.115rem;
+  }
+}
+@media (max-width: 700px) {
+  main .current-time-section .greeting .currently {
+    display: none;
+  }
+}
 main .current-time-section .time-section {
   color: var(--white);
   transform: translateY(0);
-  transition: all 0.5s linear;
+  transition: all 0.3s linear;
 }
 main .current-time-section .time-section .time {
   font-weight: 700;
   font-size: 12.5rem;
   letter-spacing: -5px;
 }
+@media (max-width: 1000px) {
+  main .current-time-section .time-section .time {
+    letter-spacing: -4.375px;
+    font-size: 10rem;
+  }
+}
+@media (max-width: 700px) {
+  main .current-time-section .time-section .time {
+    font-size: 6.25rem;
+  }
+}
 main .current-time-section .time-section .time span {
   font-weight: 300;
   font-size: 2.5rem;
   letter-spacing: 0;
+}
+@media (max-width: 1000px) {
+  main .current-time-section .time-section .time span {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 700px) {
+  main .current-time-section .time-section .time span {
+    font-size: 1.06rem;
+  }
 }
 main .current-time-section .city {
   color: var(--white);
@@ -190,39 +301,105 @@ main .current-time-section .city {
   text-transform: uppercase;
   transform: translateY(-2rem);
 }
+@media (max-width: 1000px) {
+  main .current-time-section .city {
+    font-size: 1.125rem;
+  }
+}
+@media (max-width: 700px) {
+  main .current-time-section .city {
+    transform: translateY(-0.5rem);
+  }
+}
 main .extra-info-section {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 0;
-  color: var(--white);
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(40.7742px);
   opacity: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  padding-left: 10.3125rem;
-  padding-top: 3.625rem;
-  padding-bottom: 3.625rem;
+  padding: 3.625rem 0 3.625rem 10.3125rem;
   visibility: hidden;
+}
+@media (max-width: 1000px) {
+  main .extra-info-section {
+    padding: 7.4rem 2rem 7.4rem 4rem;
+  }
+}
+@media (max-width: 700px) {
+  main .extra-info-section {
+    grid-template-columns: 1fr;
+    padding: 3rem 1.126rem;
+  }
 }
 main .extra-info-section .extra-info {
   text-transform: uppercase;
   color: var(--darkGray);
+}
+@media (max-width: 700px) {
+  main .extra-info-section .extra-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 main .extra-info-section .extra-info span {
   font-weight: 400;
   font-size: 0.9375rem;
   letter-spacing: 3px;
 }
+@media (max-width: 1000px) {
+  main .extra-info-section .extra-info span {
+    font-size: 0.8rem;
+    letter-spacing: 2.6px;
+  }
+}
+@media (max-width: 700px) {
+  main .extra-info-section .extra-info span {
+    font-size: 0.625rem;
+  }
+}
 main .extra-info-section .extra-info p {
   font-weight: 700;
-  font-size: 56px;
+  font-size: 3.5rem;
 }
-main .extra-info-section .time-zone, main .extra-info-section .day-of-week {
-  margin-bottom: 1rem;
+@media (max-width: 1000px) {
+  main .extra-info-section .extra-info p {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 700px) {
+  main .extra-info-section .extra-info p {
+    font-size: 1.25rem;
+  }
+}
+@media (max-width: 700px) {
+  main .extra-info-section .divider {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+main .extra-info-section .divider.week {
+  margin-left: 4.5rem;
+}
+@media (max-width: 700px) {
+  main .extra-info-section .divider.week {
+    margin-left: 0;
+  }
+}
+main .extra-info-section .divider .time-zone, main .extra-info-section .divider .day-of-week {
+  margin-bottom: 2rem;
+}
+@media (max-width: 700px) {
+  main .extra-info-section .divider .time-zone, main .extra-info-section .divider .day-of-week {
+    margin-bottom: 0;
+  }
 }
 main .more-btn {
   border: 0;
@@ -236,18 +413,41 @@ main .more-btn {
   align-items: center;
   padding: 7px 7px 7px 17px;
   cursor: pointer;
-  transition: all 0.4s linear;
+  transition: all 0.3s linear;
+}
+@media (max-width: 1000px) {
+  main .more-btn {
+    bottom: 8.125rem;
+    right: 35rem;
+  }
+}
+@media (max-width: 700px) {
+  main .more-btn {
+    bottom: 6.125rem;
+    right: 16rem;
+    padding: 1px 1px 1px 17px;
+  }
 }
 main .more-btn .more-arrow {
   background-image: url("../Assets/desktop/icon-arrow-up.svg");
   width: 40px;
   height: 40px;
 }
+@media (max-width: 700px) {
+  main .more-btn .more-arrow {
+    transform: scale(0.8);
+  }
+}
 main .more-btn .less-arrow {
   background-image: url("../Assets/desktop/icon-arrow-up.svg");
   transform: rotate(180deg);
   width: 40px;
   height: 40px;
+}
+@media (max-width: 700px) {
+  main .more-btn .less-arrow {
+    transform: scale(0.8);
+  }
 }
 main .more-btn span {
   font-weight: 700;
@@ -259,6 +459,12 @@ main .more-btn span {
   opacity: 0.5;
   padding-right: 9px;
 }
+@media (max-width: 700px) {
+  main .more-btn span {
+    font-size: 0.75rem;
+    letter-spacing: 3.75px;
+  }
+}
 
 @keyframes greeting {
   0% {
@@ -267,8 +473,7 @@ main .more-btn span {
   }
   100% {
     opacity: 1;
-    order: -1;
-    transform: translateY(0);
+    transform: translateY(-2rem);
   }
 }
 :root {

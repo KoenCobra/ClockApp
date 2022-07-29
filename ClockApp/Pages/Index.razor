@@ -25,17 +25,17 @@
         <div class="greeting">
             <img src="@_iconUrl" alt="icon" />
             <p>
-                @_greeting, it's currently
+                @_greeting <span class="currently">, it's currently</span>
             </p>
         </div>
 
         <div class="time-section">
             <p class="time">
                 @CurrentTime.Data.datetime.ToString("HH:mm")
-                <span class="abbreviation">@CurrentTime.Data.abbreviation</span>
+                <span>@CurrentTime.Data.abbreviation</span>
             </p>
         </div>
-        <p class="city">In Ghent, Belgium</p>
+        <p class="city">In @IpBase.Data.data.location.city.name, @IpBase.Data.data.location.country.name</p>
 
     </div>
     <button @onclick="ShowMore" class="more-btn">
@@ -47,21 +47,26 @@
 
         @if (CurrentTime?.Data is not null)
         {
-            <div class="extra-info time-zone">
-                <span>current timezone</span>
-                <p>@CurrentTime.Data.timezone</p>
+            <div class="divider">
+                <div class="extra-info time-zone">
+                    <span>current timezone</span>
+                    <p>@CurrentTime.Data.timezone</p>
+                </div>
+
+                <div class="extra-info">
+                    <span>day of the year</span>
+                    <p>@CurrentTime.Data.day_of_year</p>
+                </div>
             </div>
-            <div class="extra-info day-of-week">
-                <span>day of the week</span>
-                <p>@CurrentTime.Data.day_of_week</p>
-            </div>
-            <div class="extra-info">
-                <span>day of the year</span>
-                <p>@CurrentTime.Data.day_of_year</p>
-            </div>
-            <div class="extra-info">
-                <span>week number</span>
-                <p>@CurrentTime.Data.week_number</p>
+            <div class="divider week">
+                <div class="extra-info day-of-week">
+                    <span>day of the week</span>
+                    <p>@CurrentTime.Data.day_of_week</p>
+                </div>
+                <div class="extra-info">
+                    <span>week number</span>
+                    <p>@CurrentTime.Data.week_number</p>
+                </div>
             </div>
         }
         else
@@ -74,7 +79,7 @@
 @code {
     private ServiceResponse<Quote>? Quote { get; set; } = new();
     private ServiceResponse<CurrentTime>? CurrentTime { get; set; } = new();
-    //private ServiceResponse<IpBase>? IpBase { get; set; } = new();
+    private ServiceResponse<IpBase>? IpBase { get; set; } = new();
 
     private string? _ip = string.Empty;
     private string _theme = string.Empty;
@@ -98,7 +103,7 @@
 
         if (_ip != null)
         {
-            //IpBase = await IpBaseApi.GetIpBase(_ip);
+            IpBase = await IpBaseApi.GetIpBase(_ip);
         }
         SetTheme();
     }
@@ -113,7 +118,7 @@
                 _greeting = "Good morning";
                 _iconUrl = "Assets/desktop/icon-sun.svg";
             }
-            else if (CurrentTime.Data.datetime.Hour > 12 && CurrentTime.Data.datetime.Hour < 18)
+            else if (CurrentTime.Data.datetime.Hour >= 12 && CurrentTime.Data.datetime.Hour < 18)
             {
                 _theme = "day-time";
                 _greeting = "Good afternoon";
